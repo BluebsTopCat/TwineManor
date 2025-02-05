@@ -52,7 +52,7 @@ tw-link:hover, .enchantment-link:hover {
 (track: &#39;main_0&#39;, &#39;loop&#39;, true)(track: &#39;main_1&#39;, &#39;loop&#39;, true)(track: &#39;main_2&#39;, &#39;loop&#39;, true)(track: &#39;main_3&#39;, &#39;loop&#39;, true)
 }
 She&#39;s tall.
-(click-replace: &quot;She&#39;s tall.&quot;)[She is a tall woman,  bent and crooked at strange angles that do not flatter her. Her heels tap against the floor. You know to hold your tounge. Other words, however, (if: $confidence &gt; 1)[flow smoothly](else:)[bumble] from your mouth.
+(click-replace: &quot;She&#39;s tall.&quot;)[She is a tall woman,  bent and crooked at strange angles that do not flatter her. Her heels tap against the floor. You know to hold your tongue. Other words, however, (if: $confidence &gt; 1)[flow smoothly](else:)[bumble] from your mouth.
 
 &quot;Yes.&quot; ]
 (click-replace: &quot;\&quot;Yes.\&quot;&quot;)[&quot;Utterly and completely, Madame,&quot; you reply.
@@ -301,7 +301,7 @@ A sigil, one plastered on the wall. It is a collection of lines, nothing more.]
 (click-replace: &quot;nothing more.&quot;)[perhaps something more. You gaze into it, tracing each stroke of pen as it goes along and along, back and forth and within and without. 
 (track: &#39;voices&#39;, &#39;loop&#39;, true)
 (track: &#39;voices&#39;, &#39;fadein&#39;, 8)
-It delights you, tickles the back of your mind. What a fanastic thing! Truly wonderous.
+It delights you, tickles the back of your mind. What a fanastic thing! Truly wondrous.
 
 (set: $madness to $madness + 1)]
 
@@ -318,7 +318,7 @@ What was that? You are less than certain
 On second thought, do you //really// have to look into this? It&#39;s scary. And dark. out.
 
 (set: $procrastinations to (a: &quot;kick your feet.&quot;, &quot;huff out a cold breath.&quot;, &quot;light a cigarette.&quot;, &quot;Stare at the floorboards.&quot;, &quot;Scratch your neck.&quot;))
-You (print: $procrastinations&#39;s ((random: 0, 4)))
+You (print: $procrastinations&#39;s ((random: 1, 5)))
 
 [[Snap out of it-&gt;Time Passes.]]
 ]
@@ -330,12 +330,12 @@ You can&#39;t dawdle now. There&#39;s something to uncover.
 (track: &#39;windy&#39;, &#39;fadein&#39;, 2)
 (track: &#39;windy&#39;, &#39;mute&#39;, false)}
 (if: $searchedstudy is false)[
-The brother had seen fit to place his study in the furthest reach of the manor. A drafty spire penetrates above, wind cutting into the side of your coat. You make your way up each step, trying your damndest not to catch on the cracks that run through the stone.
+The brother had seen fit to place his study in the furthest reach of the manor. A drafty spire penetrates above, wind cutting into the side of your coat. You make your way up each step, trying your damnedest not to catch on the cracks that run through the stone.
 
 (click-replace: &quot;stone.&quot;)[stone. Finally, you reach a heavy wooden door, and creak it open.
 (click-replace:&quot;open.&quot;)[open.
 
-The room is cramped. Not due to any design sensability, but through a sheer abundance of //things//. Knicknacks and books and skulls and quills coat the [[desk-&gt;Study-Desk]] and pile over it, shelves of tomes stacking high above your head. A ladder leans against the side of one such.
+The room is cramped. Not due to any design sensibility, but through a sheer abundance of //things//. Knicknacks and books and skulls and quills coat the [[desk-&gt;Study-Desk]] and pile over it, shelves of tomes stacking high above your head. A ladder leans against the side of one such.
 (set: $searchedstudy to true)
 {(set: $random to (random: 1,3))
 (if: $random is 1)[[[Take a Book -&gt;Study-Book1]]]
