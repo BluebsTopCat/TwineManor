@@ -104,7 +104,11 @@ The eyebrow goes a little higher.
 (set: $searchedman to false)
 (set: $starthours to false)
 (set: $searchedmad to false)
-(set: $knowbrothersname to false)</tw-passagedata><tw-passagedata pid="3" name="Visit Mansion" tags="" position="700,600" size="100,100">Your car pulls up to the front gates of the Howlett Manor, the throaty gurgle of an engine slamming its way over the coarse gravel roads. It&#39;s decrepit. (track: &#39;car&#39;, &#39;play&#39;)
+(set: $knowbrothersname to false)
+
+(set: $clue1 to false)
+(set: $clue2 to false)
+(set: $clue3 to false)</tw-passagedata><tw-passagedata pid="3" name="Visit Mansion" tags="" position="700,600" size="100,100">Your car pulls up to the front gates of the Howlett Manor, the throaty gurgle of an engine slamming its way over the coarse gravel roads. It&#39;s decrepit. (track: &#39;car&#39;, &#39;play&#39;)
 {
 (live: 7.8s)[
 
@@ -223,9 +227,11 @@ Ah, yes! The lobby. Wood and grain cloth strikes across the floor in a most wond
 ]
 (else:)[
 Time is up.
+(if: $clue1 is true and $clue2 is true and $clue3 is true)[[[Hold On...-&gt;End-Good]]]
 (if: $madness is 0)[[[Continue-&gt;End-Sane]]]
-(else-if: $madness &lt; 3)[[[Continue-&gt;End-Bad]]]
 (else-if: $madness is 3)[[[Continue-&gt;End-Mad]]]
+(else:)[[[Continue-&gt;End-Bad]]]
+
 ]
 
 </tw-passagedata><tw-passagedata pid="6" name="Read Note" tags="" position="1200,800" size="100,100">//&#39;$name,&#39;// 
@@ -286,6 +292,7 @@ However...]
 (else:) [No, not however. What little warmth this room carried is gone. Candles flicker violent red.(if: $madness &gt; 1)[ Mounted eyes follow you. You are not alone. Perhaps you will never be so again.]
 
 It seems there are shoe scuffs in the wood. Someone has been here recently. They wore stilettos.
+(set: $clue1 to true)
 ]
 {(set: $searchedlobby to $searchedlobby + 1)
 (if: $searchedlobby is 1)[
@@ -335,19 +342,19 @@ The brother had seen fit to place his study in the furthest reach of the manor. 
 (click-replace: &quot;stone.&quot;)[stone. Finally, you reach a heavy wooden door, and creak it open.
 (click-replace:&quot;open.&quot;)[open.
 
-The room is cramped. Not due to any design sensibility, but through a sheer abundance of //things//. Knicknacks and books and skulls and quills coat the [[desk-&gt;Study-Desk]] and pile over it, shelves of tomes stacking high above your head. A ladder leans against the side of one such.
+The room is cramped. Not due to any design sensibility, but through a sheer abundance of //things//. Knicknacks and books and skulls and quills coat the [[desk-&gt;Study-Desk]] and pile over it, shelves of {(set: $random to (random: 1,3))
+(if: $random is 1)[[[tomes -&gt;Study-Book1]]]
+(else-if: $random is 2)[[[tomes -&gt;Study-Book2]]]
+(else-if: $random is 3)[[[tomes -&gt;Study-Book3]]]} stacking high above your head. A ladder leans against the side of one such.
 (set: $searchedstudy to true)
-{(set: $random to (random: 1,3))
-(if: $random is 1)[[[Take a Book -&gt;Study-Book1]]]
-(else-if: $random is 2)[[[Take a Book -&gt;Study-Book2]]]
-(else-if: $random is 3)[[[Take a Book -&gt;Study-Book3]]]}
+
 [[Return-&gt;Time Passes.]]]]]
 (else:)[
-The room is cramped. Not due to any design sensability, but through a sheer abundance of //things//. Knicknacks and books and skulls and quills coat the [[desk-&gt;Study-Desk]] and pile over it, shelves of tomes stacking high above your head. A ladder leans against the side of one such.
-{(set: $random to (random: 1,3))
-(if: $random is 1)[[[Take a Book -&gt;Study-Book1]]]
-(else-if: $random is 2)[[[Take a Book -&gt;Study-Book2]]]
-(else-if: $random is 3)[[[Take a Book -&gt;Study-Book3]]]}
+The room is cramped. Not due to any design sensability, but through a sheer abundance of //things//. Knicknacks and books and skulls and quills coat the [[desk-&gt;Study-Desk]] and pile over it, shelves of {(set: $random to (random: 1,3))
+(if: $random is 1)[[[tomes -&gt;Study-Book1]]]
+(else-if: $random is 2)[[[tomes -&gt;Study-Book2]]]
+(else-if: $random is 3)[[[tomes -&gt;Study-Book3]]]} stacking high above your head. A ladder leans against the side of one such.
+
 [[Return-&gt;Time Passes.]]
 ]</tw-passagedata><tw-passagedata pid="12" name="hal.tracks" tags="" position="500,200" size="100,100">intro: ./audio/mansion_intro.mp3
 main_0: ./audio/mansion_main_0.mp3
@@ -380,7 +387,7 @@ the letter starts.
 //I regret my absence of contact over these years, I would assume the silence has been overburdening! Regrettable- though my expeditions have not been without their merit.//
 {(track: &#39;paper&#39;, &#39;play&#39;)}
 //I have found our way forward through this cloying malcontent. It is regrettable that it is not an option without great sacrifice-- though one you will want pay. Enclosed within are notes. Follow them closely, and I will provide the meats.//
-
+(set: $clue2 to true)
 //Yours eternally,//
 //Madame.//
 
@@ -391,8 +398,8 @@ the letter starts.
 {(track: &#39;book&#39;, &#39;play&#39;)}
 //It&#39;s interesting, then, that the fountain of youth has persisted in its narrative throughout the annals of history. Unchanged in concept, the trappings of its trope persist across cultures, thoughout people in times- though it always remains an obstinate hypothetial. 
 
-Why, then, does this framing of liquid undeath remain so persistent? As In prior passages, K.L. Martise&#39;s theorums hold relevant, providing a frame with which to reperceive the connotations to one more practically-minded. I hesistate to..//
-
+Why, then, does this framing of liquid undeath remain so persistent? As In prior passages, K.L. Martise&#39;s theorums hold relevant, providing a frame with which to reperceive the connotations to one more practically-minded. Nothing is gained without sacrifice. In each depiction of the fountain, something irreconcilable is lost in the process-- mind, spirit, comerades-- and thus, it would follow that to gain such life, an equal measure must be given..//
+(set: $clue3 to true)
 Your eyes glaze off.
 [[Carry On.-&gt;Study]]]</tw-passagedata><tw-passagedata pid="17" name="Study-Book2" tags="" position="1700,200" size="100,100">You grab a book of the shelf. It&#39;s muddy red, with a blackened binding.
 
@@ -422,10 +429,48 @@ It almost makes a strange sense? The linework is somewhat shoddy, though the int
 You can hear the heavy rumble of machinery as it heads up the drive. You have discovered nothing, but perhaps that is better than having lost anything in the pursuit.]
 (click-replace:&quot;pursuit.&quot;)[pursuit.
 
-You don&#39;t dare find a manner to contact Madame. Her disappointment would be unpleasent. You just leave. A night in a strange manor is a pleasent story, you suppose.
+You don&#39;t dare find a manner to contact Madame. Her disappointment would be unpleasent. You just leave. A night in a strange manor is an interesting story, you suppose.
 
-END.]</tw-passagedata><tw-passagedata pid="20" name="End-Bad" tags="" position="1500,700" size="100,100"></tw-passagedata><tw-passagedata pid="21" name="End-Mad" tags="" position="1500,875" size="100,100"></tw-passagedata><tw-passagedata pid="22" name="hal.config" tags="" position="600,200" size="100,100">showControls: false
-preload: true</tw-passagedata></tw-storydata>
+END.]</tw-passagedata><tw-passagedata pid="20" name="End-Mad" tags="" position="1500,700" size="100,100">The frenzied crackle of day&#39;s break shines, a final chime of the clocks&#39; ring-gong pulling you from the thoughts of which you&#39;ve occupied.
+
+(click-replace: &quot;occupied.&quot;)[contemplated.
+
+and oh what great thoughts they are! Viscous, abject things that burrow and weave into your mind and nest more than you could ever hope to be. Raps on the window.]
+
+(click-replace: &quot;window.&quot;)[holes to somewhere else as that something tries to pry deeper through, a fountain of youth-in-waiting should only someone less make a plea bargain.]
+
+(click-replace: &quot;bargain.&quot;)[gamble...
+
+It doesn&#39;t need to be the prior, though, does it? Any sufficient mind can seek a deal with something more, and a deal holds little value to something so great- easily overwritten and undersold. If you only reach out, you could be forever.
+
+(click-replace: &quot; forever.&quot;)[- and so you will.
+
+END.]</tw-passagedata><tw-passagedata pid="21" name="hal.config" tags="" position="700,200" size="100,100">showControls: false
+preload: true</tw-passagedata><tw-passagedata pid="22" name="End-Good" tags="" position="1700,500" size="100,100">Something about this has been rotten since the beginning.
+
+(click-replace: &quot;beginning.&quot;)[beginning.
+
+You know no name for madame, and she has clearly been here, in contact. That basis of a lie would already undercut any interaction of which you held...]
+
+(click-replace: &quot;held...&quot;)[held, but even more damning is the evidence which lay through here. You have survived thus far, with your wits unaddled, but it is almost certain she will come to finish whatever rite has begun here.]
+
+(click-replace: &quot;begun here.&quot;)[begun here.
+
+The constable would never believe the truth. But perhaps a different one would suffice.
+
+END.]</tw-passagedata><tw-passagedata pid="23" name="End-Bad" tags="" position="1700,700" size="100,100">You&#39;ve yet to find much of anything, and your searching has amounted to little. With a pained sigh, you walk towards the door, and give it a tug.
+
+(click-replace: &quot;tug&quot;)[&quot;yank&quot;]
+(click-replace: &quot;yank&quot;)[&quot;jerk, throwing your weight into it&quot;]
+(click-replace: &quot;jerk, throwing your weight into it&quot;)[Final, pained slam.
+
+It won&#39;t open. You&#39;re not sure when it happened, but the door is sealed, irrevocably. The windows are dark, too. ]
+
+(click-replace: &quot;dark, too.&quot;)[blindingly dark, as if dimming the room in the same way the sun ought illuminate. You are cold, colder than you have ever been, as the sound of clacking heels rings in the back of your mind. Her limbs are oh so long.]
+
+(click-replace: &quot;so long.&quot;)[so long.
+
+Nobody will find you. Perhaps you&#39;ve lost yourself as well.]</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
